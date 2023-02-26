@@ -1,19 +1,9 @@
-import { BuiltInProviderType } from "next-auth/providers";
 import {
-  ClientSafeProvider,
-  LiteralUnion,
   getProviders,
-  signIn,
+  signIn
 } from "next-auth/react";
 import Button from "../../components/button";
 import Layout from "../../components/layout";
-
-type SignInProps = {
-  providers: Record<
-    LiteralUnion<BuiltInProviderType, string>,
-    ClientSafeProvider
-  >;
-};
 
 export default function SignIn({ providers }: SignInProps) {
   return (

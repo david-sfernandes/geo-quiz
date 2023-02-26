@@ -13,3 +13,23 @@ type AlternativeProps = {
   showRightAnswer: boolean;
   onClick: (index: number) => void;
 };
+
+type SignInProps = {
+  providers: Record<
+    LiteralUnion<BuiltInProviderType, string>,
+    ClientSafeProvider
+  >;
+};
+
+type QuestionPageProps = {
+  question: string;
+  answer: string;
+  questionType: string;
+  alternatives: string[];
+};
+
+type LayoutProps = {
+  children: ReactNode;
+  showTopImg?: boolean;
+  pageTitle?: string
+};

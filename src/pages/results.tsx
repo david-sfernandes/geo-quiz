@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Button from "../components/button";
 import Layout from "../components/layout";
-import useResultsStore from "../store/store";
 import {
   addDoc,
   collection,
@@ -13,10 +12,11 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { db } from "../firebase";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import useResultsStore from "../../store/store";
+import { db } from "../../firebase";
 
 export default function Result() {
   const points = useResultsStore((state) => state.points);
