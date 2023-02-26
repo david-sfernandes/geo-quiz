@@ -8,9 +8,9 @@ export default function mountAlternatives(
   const alternatives: string[] = [answer];
 
   for (let i = 0; i < totalAlternatives - 1; i++) {
-    let alt = countries[getRandomNumber(0, countries.length)].name.common;
+    let alt = countries[getRandomNumber(0, countries.length - 1)].name.common;
     while (alt == answer || alternatives.includes(alt))
-      alt = countries[getRandomNumber(0, countries.length)].name.common;
+      alt = countries[getRandomNumber(0, countries.length - 1)].name.common;
     alternatives.push(alt);
   }
 

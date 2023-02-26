@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Router from "next/router";
 import { useState } from "react";
 import Alternative from "./alternative";
 import Button from "./button";
@@ -7,16 +8,30 @@ export default function FlagQuestion({
   question,
   alternatives,
   answer,
-}: Question) {
+  increasePoints,
+  finishGame,
+}: QuestionProps) {
   const [showAnswer, setShowAnswer] = useState(false);
-  const handleClick = () => {
+  const [isCorrect, setIsCorrect] = useState(false);
+  const handleClick = (index: number) => {
     setShowAnswer(true);
+    if (alternatives[index] == answer) {
+      setIsCorrect(true);
+      increasePoints();
+    } else {
+      finishGame();
+    }
   };
+  const router = Router;
 
   return (
-    <section className="bg-white p-8 rounded-3xl">
+    <>
       <div className="mt-8">
-        <img className="w-20 mb-7 shadow-xl border-2 border-gray" src={question} alt="Country flag" />
+        <img
+          className="w-20 mb-7 shadow-xl border-2 border-gray"
+          src={question}
+          alt="Country flag"
+        />
         <h2 className="font-bold text-blue text-md">
           Which country does this flag belong to?
         </h2>
@@ -35,9 +50,10 @@ export default function FlagQuestion({
       </div>
       {showAnswer && (
         <div className="flex justify-end">
-            <Button text="Next" isOrange reload/>
+          {isCorrect && <Button text="Next" isOrange onClick={router.reload} />}
+          {!isCorrect && <Button text="Next" isOrange href="/results" />}
         </div>
       )}
-    </section>
+    </>
   );
 }

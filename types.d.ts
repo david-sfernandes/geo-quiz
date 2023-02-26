@@ -1,7 +1,9 @@
-type Question = {
+type QuestionProps = {
   question: string;
   alternatives: string[];
   answer: string;
+  increasePoints: () => void;
+  finishGame: () => void;
 };
 
 type AlternativeProps = {
@@ -9,5 +11,5 @@ type AlternativeProps = {
   index: number;
   isCorrect: boolean;
   showRightAnswer: boolean;
-  onClick: () => void;
+  onClick: (index: number) => void;
 };

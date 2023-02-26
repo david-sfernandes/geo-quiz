@@ -1,3 +1,4 @@
+import Router from "next/router";
 import { useState } from "react";
 import Alternative from "./alternative";
 import Button from "./button";
@@ -6,14 +7,25 @@ export default function CapitalQuestion({
   question,
   alternatives,
   answer,
-}: Question) {
+  increasePoints,
+  finishGame,
+}: QuestionProps) {
   const [showAnswer, setShowAnswer] = useState(false);
-  const handleClick = () => {
+  const [isCorrect, setIsCorrect] = useState(false);
+
+  const handleClick = (index: number) => {
     setShowAnswer(true);
+    if (alternatives[index] == answer) {
+      setIsCorrect(true);
+      increasePoints();
+    } else {
+      finishGame();
+    }
   };
+  const router = Router;
 
   return (
-    <section className="bg-white p-8 rounded-3xl">
+    <>
       <h2 className="font-bold text-blue text-md mt-8">
         {question} is the capital of
       </h2>
@@ -31,9 +43,10 @@ export default function CapitalQuestion({
       </div>
       {showAnswer && (
         <div className="flex justify-end">
-          <Button text="Next" isOrange />
+          {isCorrect && <Button text="Next" isOrange onClick={router.reload} />}
+          {!isCorrect && <Button text="Next" isOrange href="/results" />}
         </div>
       )}
-    </section>
+    </>
   );
 }

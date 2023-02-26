@@ -4,7 +4,7 @@
 
 @layer components {
   .mainSection {
-    @apply bg-white p-8 rounded-3xl;
+    @apply bg-white p-8 rounded-3xl text-blue text-center pb-10 w-full;
   }
   .defaultTrasition {
     @apply transform transition-all duration-100 ease-out;
