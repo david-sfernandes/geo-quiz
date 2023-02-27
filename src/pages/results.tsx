@@ -32,15 +32,14 @@ export default function Result() {
   const router = useRouter();
 
   const tryAgain = async () => {
-    if (lastScoreDoc) await updateLastScore(lastScoreDoc);
+    await updateLastScore();
     startGame();
     cleanState();
     router.push("/");
   };
 
-  const updateLastScore = async (
-    lastScoreDoc: QueryDocumentSnapshot<DocumentData>
-  ) => {
+  const updateLastScore = async () => {
+    console.log(lastScoreDoc)
     if (lastScoreDoc)
       await updateDoc(doc(db, `${session?.user?.email}`, lastScoreDoc.id), {
         points: points,
@@ -88,7 +87,9 @@ export default function Result() {
         const lastScoreDoc = await getDocs(lastScoreQuery).then(
           (res) => res.docs[0]
         );
-        setLastScore(lastScoreDoc.data().points);
+        if(lastScoreDoc) {
+          setLastScore(lastScoreDoc.data().points);
+        }
         setlastScoreDoc(lastScoreDoc);
 
         const highScoreDoc = await getDocs(highScoreQuery).then(
@@ -121,7 +122,7 @@ export default function Result() {
         {session && (
           <>
             <p className="text-xs">
-              Your best score:{" "}
+              Your last score:{" "}
               <span className="text-green text-md">{lastScore}</span>
             </p>
             <p className="text-sm">
