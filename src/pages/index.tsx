@@ -20,17 +20,18 @@ export default function Home() {
       {session ? (
         <>
           <div className="flex flex-col mb-16">
-            <img
-              className="w-20 h-20 m-auto mb-10 rounded-full border border-gray relative
-              before:content-['Sign_out'] before:w-20 before:h-20 before:bg-slate-800 
-              before:text-white before:absolute before:right-0 before:left-0 before:text-xs 
-              before:flex before:items-center before:justify-center
-              before:opacity-0 before:hover:opacity-80 before:defaultTrasition"
-              src={`${session.user?.image}`}
-              alt="User image"
+            <div
               onClick={() => signOut()}
               title="Sign out"
-            />
+              className="w-20 h-20 m-auto mb-10 rounded-full border border-gray relative 
+                overflow-hidden cursor-pointer
+                before:content-['Sign_out'] before:w-20 before:h-20 before:bg-slate-800 
+                before:text-white before:absolute before:right-0 before:left-0 before:text-xs 
+                before:flex before:items-center before:justify-center
+                before:opacity-0 before:hover:opacity-80 before:defaultTrasition"
+            >
+              <img src={`${session.user?.image}`} alt="User image" className="w-full h-full"/>
+            </div>
             <h1 className="text-md font-bold">Welcome {session.user?.name}!</h1>
           </div>
           <Button text="Play now" href="/question" isOrange />
